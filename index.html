@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background: #000;
+      color: #fff;
+    }
+
+    /* ── VIDEO BACKGROUND ── */
+    .video-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .video-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+    }
+    .video-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.25) 0%,
+        rgba(0,0,0,0.15) 40%,
+        rgba(0,0,0,0.55) 100%
+      );
+    }
+
+    /* ── PAGE LAYOUT ── */
+    .page {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px 80px;
+      gap: 36px;
+    }
+
+    /* ── TITLE ── */
+    .title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-align: center;
+      color: #ffffff;
+      text-shadow:
+        0 0 10px rgba(255,255,255,1),
+        0 0 25px rgba(255,255,255,0.95),
+        0 0 55px rgba(255,255,255,0.85),
+        0 0 100px rgba(200,220,255,0.7),
+        0 0 160px rgba(180,210,255,0.5),
+        0 0 240px rgba(160,200,255,0.3);
+      animation: pulseGlow 3.5s ease-in-out infinite;
+      user-select: none;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% {
+        text-shadow:
+          0 0 10px rgba(255,255,255,1),
+          0 0 25px rgba(255,255,255,0.95),
+          0 0 55px rgba(255,255,255,0.85),
+          0 0 100px rgba(200,220,255,0.7),
+          0 0 160px rgba(180,210,255,0.5),
+          0 0 240px rgba(160,200,255,0.3);
+      }
+      50% {
+        text-shadow:
+          0 0 15px rgba(255,255,255,1),
+          0 0 40px rgba(255,255,255,1),
+          0 0 80px rgba(255,255,255,0.9),
+          0 0 130px rgba(200,220,255,0.85),
+          0 0 200px rgba(180,210,255,0.65),
+          0 0 300px rgba(160,200,255,0.45);
+      }
+    }
+
+    /* ── SOCIAL BUTTONS ── */
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      backdrop-filter: blur(8px);
+      transition: background 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: rgba(255,255,255,0.22);
+      border-color: rgba(255,255,255,0.9);
+      box-shadow: 0 0 18px rgba(255,255,255,0.35);
+      transform: translateY(-2px);
+    }
+    .btn svg { flex-shrink: 0; }
+
+    /* ── ABOUT PANEL ── */
+    .panel {
+      width: 100%;
+      max-width: 680px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+      border-radius: 20px;
+      padding: 40px 44px;
+      box-shadow:
+        0 8px 32px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.15);
+    }
+
+    .panel h2 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .panel p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.88);
+      font-weight: 300;
+    }
+
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.7), transparent);
+      margin: 20px 0;
+      border-radius: 2px;
+    }
+
+    .info-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 32px;
+      margin-top: 22px;
+    }
+    .info-item {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.65);
+      font-weight: 400;
+    }
+    .info-item span {
+      color: rgba(255,255,255,0.95);
+      font-weight: 500;
+    }
+
+    @media (max-width: 520px) {
+      .panel { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- VIDEO BACKGROUND -->
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="https://www.image2url.com/r2/default/videos/1782289149440-5279e5ec-ac9b-4401-bd60-4b1d9bec398a.mp4" type="video/mp4"/>
+    </video>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="page">
+
+    <!-- TITLE -->
+    <h1 class="title">ABOUT ME!</h1>
+
+    <!-- SOCIAL BUTTONS -->
+    <div class="socials">
+
+      <!-- Twitter / X -->
+      <a href="#" class="btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+        Twitter / X
+      </a>
+
+      <!-- GitHub -->
+      <a href="#" class="btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+        </svg>
+        GitHub
+      </a>
+
+      <!-- Instagram -->
+      <a href="#" class="btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+        Instagram
+      </a>
+
+      <!-- Discord -->
+      <a href="#" class="btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+        </svg>
+        Discord
+      </a>
+
+    </div>
+
+    <!-- ABOUT PANEL -->
+    <div class="panel">
+      <h2>Who am I?</h2>
+      <p>
+        Hey! Welcome to my little corner of the internet. 
+        I'm someone who loves [your passion here] and spends way too much time 
+        [something fun about you]. Whether it's [hobby], [hobby], or just vibing — 
+        this is me.
+      </p>
+      <div class="divider"></div>
+      <p>
+        Feel free to explore, connect with me on socials, or just drop by to say hi. 
+        Always down to meet new people and collab on cool stuff.
+      </p>
+      <div class="info-row">
+        <div class="info-item">📍 <span>Your Location</span></div>
+        <div class="info-item">🎮 <span>Your Hobby</span></div>
+        <div class="info-item">💻 <span>Your Skill</span></div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
