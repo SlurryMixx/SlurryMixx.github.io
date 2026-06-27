@@ -254,5 +254,38 @@
 
   </div>
 
+  <!-- BACKGROUND AUDIO -->
+  <audio id="bgAudio" preload="auto">
+    <source src="https://rr2---sn-bvvbaxivnuxqjvhj5nu-vgql.googlevideo.com/videoplayback?expire=1782558142&ei=Xlk_asr6COuesfIPzoL_gA0&ip=172.88.1.121&id=o-AFZByu5L_pzi9tP4F9OLx4SzlfxLlFDNsk5qnziChkPE&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&rms=au%2Cau&bui=ARmQxEXhply4DbTFqZPkTZ1Rsk3CrJ5Otdz2upa32ecr6wCczhwC4u04SZwM9NN3tBYolNC0ECOAFHrz&spc=SQ-umuf55Gw1x0v81cWBdbO0SdrSovaUvniEZ8sK0TB1QCu6aRPVJoEIS7BCWb3WmjgKlMB7&vprv=1&svpuc=1&mime=video%2Fmp4&ns=MXwzopXaRCBiTG3yr9phLEcW&rqh=1&cnr=14&ratebypass=yes&dur=45.998&lmt=1745587267393332&fexp=51565116,51565681,51987687&c=WEB_EMBEDDED_PLAYER&sefc=1&txp=8218224&n=8VJw-RaXvmgh5A&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Cns%2Crqh%2Ccnr%2Cratebypass%2Cdur%2Clmt&sig=AHEqNM4wRQIgNkIJ2oOgsgijaqXMn-mlCTNaKoHztlCkTFPYIjJ3z2ACIQCeD92iqxsyoz5rhU7t4NMdrwbs-i4zt5Lc8a4eC5oW4A%3D%3D&redirect_counter=1&rm=sn-a5myl7l&rrc=104&req_id=27a0e2fd9eca3ee&cms_redirect=yes&cmsv=e&cps=100&ipbypass=yes&met=1782536561,&mh=dF&mip=2601:244:4b03:8420::3e3e&mm=31&mn=sn-bvvbaxivnuxqjvhj5nu-vgql&ms=au&mt=1782536005&mv=m&mvi=2&pl=36&lsparams=cps,ipbypass,met,mh,mip,mm,mn,ms,mv,mvi,pl,rms&lsig=APaTxxMwRgIhAMr2VgVT41kWsT_bquIJKwGMq-XIkVBnlgv-eWmytXDHAiEAwSWiAH0i2yZ1HzUMb78o81uZ1bXFx-BkZoNtoaiREvk%3D" type="video/mp4"/>
+  </audio>
+
+  <script>
+    const audio = document.getElementById('bgAudio');
+    const END_TIME = 22;
+
+    function startAudio() {
+      audio.currentTime = 0;
+      audio.volume = 0.5;
+      audio.play().catch(() => {});
+    }
+
+    audio.addEventListener('timeupdate', () => {
+      if (audio.currentTime >= END_TIME) {
+        audio.currentTime = 0;
+        audio.play();
+      }
+    });
+
+    // Try autoplay, fall back to click-to-start
+    document.addEventListener('DOMContentLoaded', () => {
+      startAudio();
+    });
+
+    // If autoplay blocked, start on first user interaction
+    document.addEventListener('click', () => {
+      if (audio.paused) startAudio();
+    }, { once: true });
+  </script>
+
 </body>
 </html>
